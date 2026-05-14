@@ -1,6 +1,5 @@
 # Godot 4+ specific
 .godot/
-export_presets.cfg
 *.import
 *.stex
 *.uid
@@ -17,3 +16,10 @@ export_presets.cfg
 .DS_Store
 Thumbs.db
 desktop.ini
+# Build artifacts
+build/
+*.exe
+*.pck
+*.x86_64
+*.dmg
+*.zip
