@@ -1,0 +1,19 @@
+# Godot 4+ specific
+.godot/
+export_presets.cfg
+*.import
+*.stex
+*.uid
+
+# Editor/IDE
+*.tmp
+*.log
+*.pid
+*.swp
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
