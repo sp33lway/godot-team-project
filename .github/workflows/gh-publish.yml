@@ -2,6 +2,7 @@ name: godot-ci
 on:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
 
 env:
   GODOT_VERSION: 4.6.2
