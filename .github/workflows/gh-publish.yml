@@ -15,7 +15,7 @@ jobs:
     name: Export game
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Godot Export
         id: export
@@ -28,11 +28,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
+      - name: List build output
+        run: |
+          echo "=== Build directory contents ==="
+          find /home/runner/.local/share/godot/builds/ -type f 2>/dev/null || echo "no files"
+
+      - name: Archive build
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cd /home/runner/.local/share/godot/builds/windows
+          zip -r /tmp/game-windows.zip .
+
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+          artifacts: "/tmp/game-windows.zip"
           token: ${{ secrets.GH_TOKEN }}
           tag: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
